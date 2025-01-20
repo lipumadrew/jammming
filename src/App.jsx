@@ -13,7 +13,7 @@ function App() {
     <div>
       <h1>Jamming: Playlist Editor</h1>
       <SearchBar />
-      <div style={{ display: "flex" }}>
+      <div>
         <SearchResults />
         <PlaylistEditor />
       </div>
