@@ -1,0 +1,4 @@
+const SearchResults = () => {
+  return <></>
+
+};
