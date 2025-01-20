@@ -1,0 +1,26 @@
+.playlistEditorContainer {
+  border: solid black 2px;
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playlistEditorHeader {
+  background-color: blue;
+  width: 100%;
+  height: 20%;
+}
+
+.playlistEditorBody {
+  background-color: aqua;
+  width: 100%;
+  height: 60%;
+}
+
+.playlistEditorFooter {
+  background-color: aquamarine;
+  width: 100%;
+  height: 20%;
+}

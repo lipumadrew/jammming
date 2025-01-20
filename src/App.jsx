@@ -11,9 +11,11 @@ function App() {
 
   return (
     <div>
+      <div className="upper-container">
       <h1>Jamming: Playlist Editor</h1>
       <SearchBar />
-      <div>
+      </div>
+      <div className="middle-container">
         <SearchResults />
         <PlaylistEditor />
       </div>
