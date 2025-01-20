@@ -12,8 +12,9 @@ function App() {
   return (
     <div>
       <div className="upper-container">
-      <h1>Jamming: Playlist Editor</h1>
-      <SearchBar />
+      <h1>Jammming: Playlist Editor</h1>
+      <h2></h2>
+
       </div>
       <div className="middle-container">
         <SearchResults />

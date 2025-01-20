@@ -9,9 +9,14 @@
   height: 60px;
   width: 60px;
   background-color: brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .trackImg {
+    height: 50px;
+    width: 50px;
 }
 
 .trackDetailsContainer {

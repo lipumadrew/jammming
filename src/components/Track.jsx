@@ -4,6 +4,7 @@ const Track = () => {
   return (
     <div id="track-container" className={styles.trackContainer}>
       <div id="track-img-container" className={styles.trackImgContainer}>
+        <img src="" alt="" className={styles.trackImg}/>
       </div>
       <div
         id="track-details-container"
