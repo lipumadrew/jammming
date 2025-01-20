@@ -1,4 +1,4 @@
 const SearchResults = () => {
-  return <></>
+  return <><div></div></>
 
 };
