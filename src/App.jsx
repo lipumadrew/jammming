@@ -1,19 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import SearchBar from "./components/searchBar.jsx";
 import PlaylistEditor from "./components/playlistEditor.jsx";
 import SearchResults from "./components/SearchResults.jsx";
+import { use } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState("http://localhost:5173/");
+  const [clientId, setClientId] = useState("88cf412ba66b4486b502d2c24425d4ea");
+  const [authCode, setAuthCode] = useState();
 
-  const userAuth = async () => {
-    //Process for PKCE authorization
-    //I have no idea. I'm winging it.
-    //OK, it works, just update the redirect URI on the spotify api dash board, and paste it here
-    //When ready to deploy, it will be the vercel domain of course
+  useEffect(() => {
+    if (localStorage.getItem("code")) {
+      getToken(localStorage.getItem("code"));
+    }
+  }, []);
+
+  const authorizationEndpoint = "https://accounts.spotify.com/authorize";
+  const tokenEndpoint = "https://accounts.spotify.com/api/token";
+  const scope = "user-read-private user-read-email";
+
+  const getAuthCode = async () => {
+    //-------------------------------crap
 
     const generateRandomString = (length) => {
       const possible =
@@ -24,6 +35,23 @@ function App() {
 
     const codeVerifier = generateRandomString(64);
 
+
+    async function sha256(plain) {
+      const encoder = new TextEncoder()
+      const data = encoder.encode(plain)
+    
+      return window.crypto.subtle.digest('SHA-256', data)
+    }
+    
+    function base64urlencode(a) {
+      return btoa(String.fromCharCode.apply(null, new Uint8Array(a))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''))
+    }
+    
+    const hashed = await sha256(verifyCode)
+    const codeChallenge = base64urlencode(hashed)
+
+    /*
     const sha256 = async (plain) => {
       const encoder = new TextEncoder();
       const data = encoder.encode(plain);
@@ -39,6 +67,8 @@ function App() {
 
     const hashed = await sha256(codeVerifier);
     const codeChallenge = base64encode(hashed);
+    */
+
     const clientId = "88cf412ba66b4486b502d2c24425d4ea";
     const redirectUri = "http://localhost:5173/";
 
@@ -62,38 +92,49 @@ function App() {
 
     const urlParams = new URLSearchParams(window.location.search);
     let code = urlParams.get("code");
+    window.localStorage.setItem("code", code);
 
-    const getToken = async (code) => {
-      // stored in the previous step
-      let codeVerifier = localStorage.getItem("code_verifier");
+    //-------------------------------crap
+  };
 
-      const payload = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          client_id: clientId,
-          grant_type: "authorization_code",
-          code,
-          redirect_uri: redirectUri,
-          code_verifier: codeVerifier,
-        }),
-      };
+  const getToken = async (code) => {
+    // stored in the previous step
+    let codeVerifier = localStorage.getItem("code_verifier");
 
-      const body = await fetch(url, payload);
-      const response = await body.json();
-
-      localStorage.setItem("access_token", response.access_token);
+    const payload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        client_id: "88cf412ba66b4486b502d2c24425d4ea",
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: "http://localhost:5173/",
+        code_verifier: codeVerifier,
+      }),
     };
-    getToken(code);
+
+    const body = await fetch("https://accounts.spotify.com/api/token", payload);
+
+    const response = await body.json();
+
+    localStorage.setItem("access_token", response.access_token);
+  };
+
+  const handleLogIn = async () => {
+    await getAuthCode();
   };
 
   return (
     <div>
       <div className="upper-container">
         <h1>Jammming: Playlist Editor</h1>
-        <button onClick={userAuth}>Log in?</button>
+        {isLoggedIn ? (
+          "Welcome 'insert name here'"
+        ) : (
+          <button onClick={handleLogIn}>Log in?</button>
+        )}
         <h2></h2>
       </div>
       <div className="middle-container">
