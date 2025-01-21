@@ -1,11 +1,12 @@
 
 
 
-
+//TODO: Add styling for selected/unselected buttons. Can change based on selected search type
 const SearchOptionBtn = (props) => {
 
+
+
     const handleClick = () => {
-        alert(props.searchType);
         props.changeSearchType(props.searchType);
     }
     
