@@ -1,10 +1,18 @@
 
 
 
+
 const SearchOptionBtn = (props) => {
+
+    const handleClick = () => {
+        alert(props.searchType);
+        props.changeSearchType(props.searchType);
+    }
+    
+
     return (
-        <button>
-            <h3>{props.optionText}</h3>
+        <button onClick={handleClick}>
+            {props.optionText}
         </button>
     )
 }

@@ -1,9 +1,14 @@
-const SearchBar = () => {
+const SearchBar = (props) => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(props.searchType);
+  }
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="text" />
-        <input type="submit" name="" id="" />
+        <input type="submit" name="" id=""/>
       </form>
     </>
   );

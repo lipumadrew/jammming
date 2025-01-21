@@ -2,15 +2,21 @@ import styles from "../css/SearchResults.module.css";
 import Track from "./Track";
 import SearchBar from "./searchBar";
 import SearchOptionBtn from "./SearchOptionBtn";
+import { useState } from "react";
 
 const SearchResults = () => {
+
+  const [searchType, setSearchType] = useState("");
+
+
+
   return (
     <div className={styles.searchResultsContainer}>
       <div id="results-header" className={styles.searchResultsHeader}><h2>Search For:</h2>
-      <SearchOptionBtn searchType="myPlaylists" optionText="My Playlists"/>
-      <SearchOptionBtn searchType="artists" optionText="Artists"/>
-      <SearchOptionBtn searchType="tracks" optionText="Tracks"/>
-      <SearchBar />
+      <SearchOptionBtn searchType="myPlaylists" optionText="My Playlists" changeSearchType={setSearchType}/>
+      <SearchOptionBtn searchType="artists" optionText="Artists" changeSearchType={setSearchType}/>
+      <SearchOptionBtn searchType="tracks" optionText="Tracks" changeSearchType={setSearchType}/>
+      <SearchBar searchType={searchType}/>
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
         <Track/>
