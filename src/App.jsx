@@ -190,6 +190,7 @@ function App() {
     <div>
       <div className="upper-container">
         <h1>Jammming: Playlist Editor</h1>
+        <h2>There is currently a bug when switching between search items</h2>
         {isLoggedIn ? "Welcome 'insert name here'" : <button onClick={loginWithSpotifyClick}>Log in?</button>}
         <h2></h2>
       </div>

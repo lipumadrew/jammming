@@ -15,8 +15,18 @@ const SearchResults = () => {
         "Plese select whether you want to search for tracks, artists, or your playlists."
       );
     } else if (searchType == "myPlaylists") {
-      //TODO
-      //This is a different request, but we should add this functionality later
+      const response = await fetch(
+        `https://api.spotify.com/v1/me/playlists?limit=10`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      );
+      const data = await response.json();
+      setSearchResults(data.items);
     } else if (searchType == "artists") {
       const response = await fetch(
         `https://api.spotify.com/v1/search?q=${queryString}&type=artist&limit=10`,
