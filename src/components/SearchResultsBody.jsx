@@ -2,6 +2,8 @@ import Track from "./Track";
 import Artist from "./Artist";
 import Playlist from "./Playlist";
 
+
+
 const SearchResultsBody = (props) => {
   if ((props.searchType == "tracks")) { //Since our search type was tracks, we map over the results and return track objects
     return (
@@ -10,6 +12,7 @@ const SearchResultsBody = (props) => {
           return (
             <Track
               key={item.id}
+              trackObj={item}
               trackTitle={item.name}
               artists={item.artists}
               trackImg={item.album.images[1].url}

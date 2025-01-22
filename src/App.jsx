@@ -67,14 +67,7 @@ if (code) {
   window.history.replaceState({}, document.title, updatedUrl);
 }
 
-// If we have a token, we're logged in, so fetch user data and render logged in template
-if (currentToken.access_token) {
-  
-}
 
-// Otherwise we're not logged in, so render the login template
-if (!currentToken.access_token) {
-}
 
 async function redirectToSpotifyAuthorize() {
   const possible =
@@ -177,6 +170,9 @@ function App() {
   const [redirectUrl, setRedirectUrl] = useState("http://localhost:5173/");
   const [clientId, setClientId] = useState("88cf412ba66b4486b502d2c24425d4ea");
   const [authCode, setAuthCode] = useState();
+  const [tracksInEditor, setTracksInEditor] = useState([]);
+
+
 
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -187,9 +183,8 @@ function App() {
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 
-  //I need to bubble up the track object all the way up, then back down into the playlist editor
-  const addTrack = () => {
-    alert("bubbled!")
+  const addTrack = (trackToAdd) => {
+    setTracksInEditor((prev) => [trackToAdd, ...prev]);
   }
 
 
@@ -202,7 +197,7 @@ function App() {
       </div>
       <div className="middle-container">
         <SearchResults handleAddTrack={addTrack}/>
-        <PlaylistEditor />
+        <PlaylistEditor tracksInEditor={tracksInEditor}/>
       </div>
     </div>
   );

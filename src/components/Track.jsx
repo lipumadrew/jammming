@@ -40,7 +40,7 @@ const Track = (props) => {
         <h3 className={styles.trackArtist}>{artistHeaderStr}</h3>
       </div>
       <div id="track-btn-container" className={styles.trackBtnContainer}>
-        <button onClick={props.handleAddTrack}>Add</button>
+        <button onClick={() => props.handleAddTrack(props.trackObj)}>Add</button>
       </div>
     </div>
   );

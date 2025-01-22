@@ -3,7 +3,7 @@ import { useState } from "react";
 import PlaylistEditorBody from "./PlaylistEditorBody";
 //Would like it to explain to the user what they are currently doing
 //Editing playlist: "Playlist Name", Creating Playlist: "Playlist Name"
-const PlaylistEditor = () => {
+const PlaylistEditor = (props) => {
   const [selectedPlaylist, setSelectedPlaylist] = useState({}); //not sure what data type...
   const [newPlaylistName, setNewPlaylistName] = useState("");
   const [tracks, setTracks] = useState([]);
@@ -56,7 +56,7 @@ const PlaylistEditor = () => {
         {isCreatingNew && <div><label>Enter Playlist Name:</label><input type="text" value={newPlaylistName} onChange={handleNewPlaylistName}/></div>}
       </div>
       <div id="editor-body" className={styles.playlistEditorBody}>
-        <PlaylistEditorBody selectedPlaylist={selectedPlaylist}/>
+        <PlaylistEditorBody selectedPlaylist={selectedPlaylist} tracksInEditor={props.tracksInEditor}/>
       </div>
       <div id="editor-footer" className={styles.playlistEditorFooter}>
         <button onClick={handleSave}>Save</button>
