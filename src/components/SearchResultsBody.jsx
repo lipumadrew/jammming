@@ -21,7 +21,7 @@ const SearchResultsBody = (props) => {
     return (
         <div>
             {props.searchResults.map((item) => {
-                return <Artist/>
+                return <Artist artistImg={item.images[2].url} artistName={item.name} key={item.id} artistFollowers={item.followers.total}/>
             })}
         </div>
     )

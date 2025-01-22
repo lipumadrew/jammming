@@ -1,13 +1,13 @@
 .artistContainer {
-    height: 60px;
+    height: 80px;
     border-bottom: solid black 1px;
     display: flex;
     justify-content: space-between;
    }
    
    .artistImgContainer {
-     height: 60px;
-     width: 60px;
+     height: 80px;
+     width: 80px;
      background-color: brown;
      display: flex;
      justify-content: center;
@@ -15,8 +15,8 @@
    }
    
    .artistImg {
-       height: 50px;
-       width: 50px;
+       height: 60px;
+       width: 60px;
    }
    
    .artistDetailsContainer {
@@ -30,11 +30,11 @@
    }
    
    .artistTitle {
-     font-size: 12px;
+     font-size: 30px;
    }
    
-   .artistArtist {
-     font-size: 10px;
+   .artistGenres {
+    font-size: 20px;
    }
    
    
