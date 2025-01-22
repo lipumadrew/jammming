@@ -27,6 +27,7 @@
      flex-direction: column;
      justify-content: center;
      overflow: hidden;
+     padding-left: 10px;
    }
    
    .artistTitle {
