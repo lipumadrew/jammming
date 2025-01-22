@@ -42,6 +42,7 @@ const PlaylistEditor = () => {
   }
   
   //actual handling of the request
+  //When the playlist is created, immediately start editing it
   const createNewPlaylist = () => {
 
   }

@@ -5,7 +5,7 @@ const Track = (props) => {
 
   let artistHeaderStr = "";
   let titleHeaderStr = props.trackTitle;
-  //TODO: Tweak ellips and comma list stuff when a good font size is chosen
+  //TODO: Tweak ellipse and comma list stuff when a good font size is chosen
 
   //comma list
   artists.map((artist, idx) => {
@@ -39,9 +39,11 @@ const Track = (props) => {
         <h2 className={styles.trackTitle}>{titleHeaderStr}</h2>
         <h3 className={styles.trackArtist}>{artistHeaderStr}</h3>
       </div>
-      <div id="track-btn-container" className={styles.trackBtnContainer}></div>
+      <div id="track-btn-container" className={styles.trackBtnContainer}>
+        <button onClick={props.handleAddTrack}>Add</button>
+      </div>
     </div>
   );
 };
-
+//Perhaps include logic so that the button is either an add button, or a remove button, depending on where it is...
 export default Track;

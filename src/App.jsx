@@ -186,6 +186,13 @@ function App() {
 
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
+
+  //I need to bubble up the track object all the way up, then back down into the playlist editor
+  const addTrack = () => {
+    alert("bubbled!")
+  }
+
+
   return (
     <div>
       <div className="upper-container">
@@ -194,7 +201,7 @@ function App() {
         <h2></h2>
       </div>
       <div className="middle-container">
-        <SearchResults />
+        <SearchResults handleAddTrack={addTrack}/>
         <PlaylistEditor />
       </div>
     </div>

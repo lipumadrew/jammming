@@ -13,6 +13,7 @@ const SearchResultsBody = (props) => {
               trackTitle={item.name}
               artists={item.artists}
               trackImg={item.album.images[1].url}
+              handleAddTrack={props.handleAddTrack}
             />
           );
         })}

@@ -5,7 +5,7 @@ import SearchOptionBtn from "./SearchOptionBtn";
 import { useState } from "react";
 import SearchResultsBody from "./SearchResultsBody";
 
-const SearchResults = () => {
+const SearchResults = (props) => {
   const [searchType, setSearchType] = useState("");
   const [searchResults, setSearchResults] = useState([]); //Array of objects.
 
@@ -90,7 +90,7 @@ const SearchResults = () => {
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
-        <SearchResultsBody searchResults={searchResults} searchType={searchType}/>
+        <SearchResultsBody searchResults={searchResults} searchType={searchType} handleAddTrack={props.handleAddTrack}/>
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>
         Footer
