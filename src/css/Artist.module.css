@@ -1,0 +1,42 @@
+.artistContainer {
+    height: 60px;
+    border-bottom: solid black 1px;
+    display: flex;
+    justify-content: space-between;
+   }
+   
+   .artistImgContainer {
+     height: 60px;
+     width: 60px;
+     background-color: brown;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   
+   .artistImg {
+       height: 50px;
+       width: 50px;
+   }
+   
+   .artistDetailsContainer {
+     background-color: green;
+     height: 100%;
+     flex-grow: 1;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     overflow: hidden;
+   }
+   
+   .artistTitle {
+     font-size: 12px;
+   }
+   
+   .artistArtist {
+     font-size: 10px;
+   }
+   
+   
+   
+   

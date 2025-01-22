@@ -3,6 +3,7 @@ import Track from "./Track";
 import SearchBar from "./searchBar";
 import SearchOptionBtn from "./SearchOptionBtn";
 import { useState } from "react";
+import SearchResultsBody from "./SearchResultsBody";
 
 const SearchResults = () => {
   const [searchType, setSearchType] = useState("");
@@ -27,6 +28,9 @@ const SearchResults = () => {
           },
         }
       );
+      const data = await response.json();
+      setSearchResults(data.artists.items);
+
     } else if (searchType == "tracks") {
       const response = await fetch(
         `https://api.spotify.com/v1/search?q=${queryString}&type=track&limit=10`,
@@ -70,9 +74,7 @@ const SearchResults = () => {
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
-        {searchResults.map((item) => {
-          return <Track key={item.id} trackTitle={item.name} artists={item.artists} trackImg={item.album.images[1].url}/>
-        })}
+        <SearchResultsBody searchResults={searchResults} searchType={searchType}/>
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>
         Footer
