@@ -26,12 +26,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 }
 
 .trackTitle {
+  font-size: 12px;
 }
 
 .trackArtist {
+  font-size: 10px;
 }
 
 .trackBtnContainer {

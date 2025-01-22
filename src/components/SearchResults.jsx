@@ -40,7 +40,7 @@ const SearchResults = () => {
       );
 
       const data = await response.json();
-      alert(data.tracks.items); //Array of objects
+      //alert(data.tracks.items); //Array of objects
       setSearchResults(data.tracks.items);
 
     } else {
@@ -71,7 +71,7 @@ const SearchResults = () => {
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
         {searchResults.map((item) => {
-          return <Track key={item.id} trackTitle={item.name} artists={item.artists}/>
+          return <Track key={item.id} trackTitle={item.name} artists={item.artists} trackImg={item.album.images[1].url}/>
         })}
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>
