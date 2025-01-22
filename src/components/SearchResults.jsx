@@ -9,6 +9,12 @@ const SearchResults = () => {
   const [searchType, setSearchType] = useState("");
   const [searchResults, setSearchResults] = useState([]); //Array of objects.
 
+  const handleSetSearchType = (type) => {
+    //This fixed the crash bug :)
+    setSearchResults([]);
+    setSearchType(type);
+  }
+
   const executeSearch = async (queryString) => {
     if (searchType == "") {
       alert(
@@ -69,17 +75,17 @@ const SearchResults = () => {
         <SearchOptionBtn
           searchType="myPlaylists"
           optionText="My Playlists"
-          changeSearchType={setSearchType}
+          changeSearchType={handleSetSearchType}
         />
         <SearchOptionBtn
           searchType="artists"
           optionText="Artists"
-          changeSearchType={setSearchType}
+          changeSearchType={handleSetSearchType}
         />
         <SearchOptionBtn
           searchType="tracks"
           optionText="Tracks"
-          changeSearchType={setSearchType}
+          changeSearchType={handleSetSearchType}
         />
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
