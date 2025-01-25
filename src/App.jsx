@@ -184,7 +184,7 @@ function App() {
 
 
   const addTrack = (trackToAdd) => {
-    setTracksInEditor((prev) => [trackToAdd, ...prev]);
+    setTracksInEditor((prev) => [...prev, trackToAdd]);
   }
 
 
