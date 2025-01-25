@@ -17,6 +17,7 @@ const SearchResultsBody = (props) => {
               artists={item.artists}
               trackImg={item.album.images[1].url}
               handleAddTrack={props.handleAddTrack}
+              isInEditor={false}
             />
           );
         })}

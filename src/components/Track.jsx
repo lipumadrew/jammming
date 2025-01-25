@@ -2,6 +2,7 @@ import styles from "../css/Track.module.css";
 import { useState } from "react";
 const Track = (props) => {
   const [artists, setArtists] = useState(props.artists);
+  
 
   let artistHeaderStr = "";
   let titleHeaderStr = props.trackTitle;
@@ -40,7 +41,8 @@ const Track = (props) => {
         <h3 className={styles.trackArtist}>{artistHeaderStr}</h3>
       </div>
       <div id="track-btn-container" className={styles.trackBtnContainer}>
-        <button onClick={() => props.handleAddTrack(props.trackObj)}>Add</button>
+        {!props.isInEditor && <button onClick={() => props.handleAddTrack(props.trackObj)}>Add</button>}
+        {props.isInEditor && <button onClick={() => props.handleRemoveTrack(props.trackObj)}>Remove</button>}
       </div>
     </div>
   );
