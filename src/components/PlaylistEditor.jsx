@@ -56,7 +56,7 @@ const PlaylistEditor = (props) => {
         {isCreatingNew && <div><label>Enter Playlist Name:</label><input type="text" value={newPlaylistName} onChange={handleNewPlaylistName}/></div>}
       </div>
       <div id="editor-body" className={styles.playlistEditorBody}>
-        <PlaylistEditorBody selectedPlaylist={selectedPlaylist} tracksInEditor={props.tracksInEditor}/>
+        <PlaylistEditorBody selectedPlaylist={selectedPlaylist} tracksInEditor={props.tracksInEditor} handleRemoveTrack={props.handleRemoveTrack}/>
       </div>
       <div id="editor-footer" className={styles.playlistEditorFooter}>
         <button onClick={handleSave}>Save</button>

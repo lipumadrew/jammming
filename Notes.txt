@@ -1,0 +1,17 @@
+TODOs
+------------------
+-Add funcitonality to the remove button
+-Add functionality to clicking an artist
+    -it should execute a search for songs by that artist
+-Add functionality to clicking on one of the user's playlists
+    -It should populate the editor with that playlist
+-Add functionality so that if the user tries to search, but they aren't logged in, they get some kind of a message, or something
+
+
+
+Optional things
+---------------------
+-Add ability to reorder songs in the playlist, maybe up and down arrows, drag and drop if feeling ambitious :()
+-Add the ability to search tracts by title, artist, or otherwise
+-Change buttons into a dropdown menu
+-Go through and change all components so that they use object destructuring syntax, instead of props.

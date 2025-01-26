@@ -1,19 +1,21 @@
 import Track from "./Track"
-const PlaylistEditorBody = ({selectedPlaylist, tracksInEditor}) => {
+const PlaylistEditorBody = ({selectedPlaylist, tracksInEditor, handleRemoveTrack}) => {
     if (!selectedPlaylist) {
         return (<><p>Select a playlist or create a new one</p></>)
     } else {
         return (
             <div>
-              {tracksInEditor.map((item) => {
+              {tracksInEditor.map((item, index) => {
                 return (
                   <Track
-                    key={item.id}
+                    key={index}
+                    index={index}
                     trackObj={item}
                     trackTitle={item.name}
                     artists={item.artists}
                     trackImg={item.album.images[1].url}
                     isInEditor={true}
+                    handleRemoveTrack={handleRemoveTrack}
                   />
                 );
               })}

@@ -42,7 +42,7 @@ const Track = (props) => {
       </div>
       <div id="track-btn-container" className={styles.trackBtnContainer}>
         {!props.isInEditor && <button onClick={() => props.handleAddTrack(props.trackObj)}>Add</button>}
-        {props.isInEditor && <button onClick={() => props.handleRemoveTrack(props.trackObj)}>Remove</button>}
+        {props.isInEditor && <button onClick={() => props.handleRemoveTrack(props.index)}>Remove</button>}
       </div>
     </div>
   );

@@ -186,6 +186,11 @@ function App() {
   const addTrack = (trackToAdd) => {
     setTracksInEditor((prev) => [...prev, trackToAdd]);
   }
+  
+  //May have to remove by index, filter
+  const removeTrack = (removalIndex) => {
+    setTracksInEditor((prev) => prev.filter((ele, idx) => idx !== removalIndex))
+  }
 
 
   return (
@@ -197,7 +202,7 @@ function App() {
       </div>
       <div className="middle-container">
         <SearchResults handleAddTrack={addTrack}/>
-        <PlaylistEditor tracksInEditor={tracksInEditor}/>
+        <PlaylistEditor tracksInEditor={tracksInEditor} handleRemoveTrack={removeTrack}/>
       </div>
     </div>
   );
