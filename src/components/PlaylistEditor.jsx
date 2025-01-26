@@ -1,12 +1,11 @@
 import styles from "../css/PlaylistEditor.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlaylistEditorBody from "./PlaylistEditorBody";
 //Would like it to explain to the user what they are currently doing
 //Editing playlist: "Playlist Name", Creating Playlist: "Playlist Name"
 const PlaylistEditor = (props) => {
-  const [selectedPlaylist, setSelectedPlaylist] = useState({}); //not sure what data type...
+  const [selectedPlaylist, setSelectedPlaylist] = useState({name: null}); //not sure what data type...
   const [newPlaylistName, setNewPlaylistName] = useState("");
-  const [tracks, setTracks] = useState([]);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -46,6 +45,15 @@ const PlaylistEditor = (props) => {
   const createNewPlaylist = () => {
 
   }
+
+  useEffect(() => {
+    if (props.tracksInEditor.length > 0 && selectedPlaylist.name == null) {
+      setIsCreatingNew(true);
+    } else if (props.tracksInEditor.length == 0 && selectedPlaylist.name == null) {
+      setIsCreatingNew(false);
+    }
+  })
+  
 
   return (
     <div className={styles.playlistEditorContainer}>

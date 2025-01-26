@@ -1,12 +1,15 @@
 TODOs
 ------------------
--Add funcitonality to the remove button
+-Add funcitonality to the remove button (DONE)
 -Add functionality to clicking an artist
     -it should execute a search for songs by that artist
 -Add functionality to clicking on one of the user's playlists
     -It should populate the editor with that playlist
 -Add functionality so that if the user tries to search, but they aren't logged in, they get some kind of a message, or something
-
+-Add functionality to save and create new buttons in the playlist editor
+    -When a song is added, and we are not currently editing an existing one, the create new stuff should show up
+    -The variables will have to change when the track array is not empty
+-Add styling so that it's more obvious what's happening....
 
 
 Optional things
