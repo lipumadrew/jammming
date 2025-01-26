@@ -18,3 +18,4 @@ Optional things
 -Add the ability to search tracts by title, artist, or otherwise
 -Change buttons into a dropdown menu
 -Go through and change all components so that they use object destructuring syntax, instead of props.
+-Add pagination, or at least increase the limits of the results
