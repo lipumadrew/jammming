@@ -13,7 +13,7 @@ const PlaylistEditorBody = ({selectedPlaylist, tracksInEditor, handleRemoveTrack
                     trackObj={item}
                     trackTitle={item.name}
                     artists={item.artists}
-                    trackImg={item.album.images[1].url}
+                    trackImg={item.album.images}
                     isInEditor={true}
                     handleRemoveTrack={handleRemoveTrack}
                   />
