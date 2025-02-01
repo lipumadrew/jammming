@@ -27,8 +27,6 @@ const PlaylistEditor = (props) => {
 
   const handleSave = () => {};
 
-  
-
   const handleFinishCreating = () => {
     if (props.tracksInEditor.length == 0) {
       alert("Please add some tracks before creating a new playlist.");
@@ -39,18 +37,16 @@ const PlaylistEditor = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (props.tracksInEditor.length > 0 && props.isEditing == false) {
-      setIsCreatingNew(true);
-    }
-  });
-
   return (
     <div className={styles.playlistEditorContainer}>
       <div id="editor-header" className={styles.playlistEditorHeader}>
-        {props.isEditing && !props.isCreatingNew && <h2>Editing: somehow extract name</h2>}
-        {props.isCreatingNew == false && props.isEditing == false && <h2>Editor</h2>}
-        {props.isCreatingNew  && <h2>Creating: {newPlaylistName}</h2>}
+        {props.isEditing && !props.isCreatingNew && (
+          <h2>Editing: somehow extract name</h2>
+        )}
+        {props.isCreatingNew == false && props.isEditing == false && (
+          <h2>Editor</h2>
+        )}
+        {props.isCreatingNew && <h2>Creating: {newPlaylistName}</h2>}
         {props.isCreatingNew && (
           <div>
             <label>Enter Playlist Name:</label>
@@ -70,7 +66,9 @@ const PlaylistEditor = (props) => {
         />
       </div>
       <div id="editor-footer" className={styles.playlistEditorFooter}>
-        {props.isEditing && <button onClick={handleSave}>Save Changes</button>}
+        {props.isEditing && !props.isCreatingNew && (
+          <button onClick={handleSave}>Save Changes</button>
+        )}
         {!props.isCreatingNew && (
           <button onClick={props.handleStartCreating}>Create New</button>
         )}
