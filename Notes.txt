@@ -24,3 +24,4 @@ Optional things
 -Go through and change all components so that they use object destructuring syntax, instead of props.
 -Add pagination, or at least increase the limits of the results
 -Add some kind of loading thing
+-Add a placeholder image for playlists that have none

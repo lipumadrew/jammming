@@ -218,6 +218,17 @@ function App() {
         description: "This playlist was made with Andrew's awesome playlist editor."
       })
     });
+    let data = await response.json();
+    const addResponse = await fetch(`https://api.spotify.com/v1/playlists/${data.id}/tracks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify({
+        uris: trackUris
+      })
+    });
   };
 
   return (
