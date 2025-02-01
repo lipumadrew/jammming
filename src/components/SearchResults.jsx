@@ -13,7 +13,7 @@ const SearchResults = (props) => {
     //This fixed the crash bug :)
     setSearchResults([]);
     setSearchType(type);
-  }
+  };
 
   const executeSearch = async (queryString) => {
     if (searchType == "") {
@@ -32,7 +32,6 @@ const SearchResults = (props) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       setSearchResults(data.items);
     } else if (searchType == "artists") {
       const response = await fetch(
@@ -47,7 +46,6 @@ const SearchResults = (props) => {
       );
       const data = await response.json();
       setSearchResults(data.artists.items);
-
     } else if (searchType == "tracks") {
       const response = await fetch(
         `https://api.spotify.com/v1/search?q=${queryString}&type=track&limit=10`,
@@ -60,11 +58,9 @@ const SearchResults = (props) => {
         }
       );
 
-
       const data = await response.json();
-      //alert(data.tracks.items); //Array of objects
       setSearchResults(data.tracks.items);
-
+      
     } else {
       alert("Something went wrong: Unrecognized search type.");
     }
@@ -72,7 +68,7 @@ const SearchResults = (props) => {
 
   const handleArtistClick = (artistName) => {
     alert("You clicked " + artistName);
-  }
+  };
 
   return (
     <div className={styles.searchResultsContainer}>
@@ -96,7 +92,13 @@ const SearchResults = (props) => {
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
-        <SearchResultsBody searchResults={searchResults} searchType={searchType} handleAddTrack={props.handleAddTrack} handleArtistClick={handleArtistClick}/>
+        <SearchResultsBody
+          searchResults={searchResults}
+          searchType={searchType}
+          handleAddTrack={props.handleAddTrack}
+          handleArtistClick={handleArtistClick}
+          handlePlaylistClick={props.handlePlaylistClick}
+        />
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>
         Footer

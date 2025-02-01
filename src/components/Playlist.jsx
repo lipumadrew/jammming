@@ -7,7 +7,7 @@ const Playlist = (props) => {
     imgSrc = props.playlistImg[0].url;
   }
     return (
-        <div id="playlist-container" className={styles.playlistContainer}>
+        <div id="playlist-container" className={styles.playlistContainer} onClick={() => props.handlePlaylistClick(props.id)}>
           <div id="playlist-img-container" className={styles.playlistImgContainer}>
             <img src={imgSrc} alt="No image" className={styles.playlistImg} />
           </div>

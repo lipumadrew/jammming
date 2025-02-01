@@ -2,10 +2,9 @@ import Track from "./Track";
 import Artist from "./Artist";
 import Playlist from "./Playlist";
 
-
-
 const SearchResultsBody = (props) => {
-  if ((props.searchType == "tracks")) { //Since our search type was tracks, we map over the results and return track objects
+  if (props.searchType == "tracks") {
+    //Since our search type was tracks, we map over the results and return track objects
     return (
       <div>
         {props.searchResults.map((item) => {
@@ -23,22 +22,39 @@ const SearchResultsBody = (props) => {
         })}
       </div>
     );
-  } else if (props.searchType == "artists") { //Artists returned instead
+  } else if (props.searchType == "artists") {
+    //Artists returned instead
     return (
-        <div>
-            {props.searchResults.map((item) => {
-                return <Artist artistImg={item.images[2].url} artistName={item.name} key={item.id} artistGenres={item.genres} handleArtistClick={props.handleArtistClick}/>
-            })}
-        </div>
-    )
+      <div>
+        {props.searchResults.map((item) => {
+          return (
+            <Artist
+              artistImg={item.images[2].url}
+              artistName={item.name}
+              key={item.id}
+              artistGenres={item.genres}
+              handleArtistClick={props.handleArtistClick}
+            />
+          );
+        })}
+      </div>
+    );
   } else if (props.searchType == "myPlaylists") {
     return (
-        <div>
-            {props.searchResults.map((item) =>  {
-                return <Playlist playlistImg={item.images} key={item.id} playlistName={item.name}/>
-            })}
-        </div>
-    )
+      <div>
+        {props.searchResults.map((item, idx) => {
+          return (
+            <Playlist
+              playlistImg={item.images}
+              key={idx}
+              id={item.id}
+              playlistName={item.name}
+              handlePlaylistClick={props.handlePlaylistClick}
+            />
+          );
+        })}
+      </div>
+    );
   }
 };
 

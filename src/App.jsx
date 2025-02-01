@@ -159,6 +159,7 @@ function App() {
   const [authCode, setAuthCode] = useState();
   const [tracksInEditor, setTracksInEditor] = useState([]);
   const [userData, setUserData] = useState({});
+  const [playlistInEditor, setPlaylistInEditor] = useState("");
 
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -206,7 +207,6 @@ function App() {
   const handleFinishCreating = async (playListName) => {
     alert("Looks good, request will be sent");
     const trackUris = tracksInEditor.map((track) => track.uri); //I think this is good
-    console.log(trackUris);
     const response = await fetch(`https://api.spotify.com/v1/users/${userData.id}/playlists`, {
       method: "POST",
       headers: {
@@ -231,6 +231,40 @@ function App() {
     });
   };
 
+  const handlePlaylistClick = async (playlistToEdit) => {
+    alert("The playlist id is " + playlistToEdit)
+    //TODO
+    //Need to potentially transfer the playlist ID to the playlist editor
+    //need to popolate the editor with the songs from that playlist
+    let response = await fetch(`https://api.spotify.com/v1/playlists/${playlistToEdit}/tracks`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      }
+    })
+    let data = await response.json();
+    console.log(data);
+
+    //This doesnt work, bc the items returned are DIFFERENT!
+    //setTracksInEditor(data.items);
+    //Need to get the IDS out of the data, then perform another request using the ids to get several tracks
+    let ids = data.items.map(item => item.track.id);
+    console.log(ids);
+    let idString = "";
+    ids.map(id => idString += id + ",")
+    response = await fetch(`https://api.spotify.com/v1/tracks?ids=${ids}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      }
+    })
+    data = await response.json();
+    console.log(data);
+    setTracksInEditor(data.tracks);
+  }
+
   return (
     <div>
       <div className="upper-container">
@@ -244,12 +278,13 @@ function App() {
         <h2></h2>
       </div>
       <div className="middle-container">
-        <SearchResults handleAddTrack={addTrack} />
+        <SearchResults handleAddTrack={addTrack}  handlePlaylistClick={handlePlaylistClick}/>
         <PlaylistEditor
           tracksInEditor={tracksInEditor}
           handleRemoveTrack={removeTrack}
           handleClearTracks={clearTracks}
           handleFinishCreating={handleFinishCreating}
+          playlistInEditor={playlistInEditor}
         />
       </div>
     </div>

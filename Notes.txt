@@ -19,7 +19,7 @@ TODOs
 Optional things
 ---------------------
 -Add ability to reorder songs in the playlist, maybe up and down arrows, drag and drop if feeling ambitious :()
--Add the ability to search tracts by title, artist, or otherwise
+-Add the ability to search tracks by title, artist, or otherwise
 -Change buttons into a dropdown menu
 -Go through and change all components so that they use object destructuring syntax, instead of props.
 -Add pagination, or at least increase the limits of the results
