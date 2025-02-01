@@ -171,6 +171,7 @@ function App() {
   const [clientId, setClientId] = useState("88cf412ba66b4486b502d2c24425d4ea");
   const [authCode, setAuthCode] = useState();
   const [tracksInEditor, setTracksInEditor] = useState([]);
+  const [userData, setUserData] = useState({});
 
 
 
@@ -181,6 +182,20 @@ function App() {
   const redirectUri = "http://localhost:5173/";
 
   const authUrl = new URL("https://accounts.spotify.com/authorize");
+
+  const checkIfLoggedIn = async () => {
+    if (localStorage.getItem("access_token")) {
+      const data = await getUserData();
+      setUserData(data);
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }
+
+  useEffect(() => {
+    checkIfLoggedIn()
+  }, [])
 
 
   const addTrack = (trackToAdd) => {
@@ -197,7 +212,7 @@ function App() {
     <div>
       <div className="upper-container">
         <h1>Jammming: Playlist Editor</h1>
-        {isLoggedIn ? "Welcome 'insert name here'" : <button onClick={loginWithSpotifyClick}>Log in?</button>}
+        {isLoggedIn ? `Welcome ${userData.display_name}` : <button onClick={loginWithSpotifyClick}>Log in?</button>}
         <h2></h2>
       </div>
       <div className="middle-container">
