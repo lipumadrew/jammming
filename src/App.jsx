@@ -160,6 +160,8 @@ function App() {
   const [tracksInEditor, setTracksInEditor] = useState([]);
   const [userData, setUserData] = useState({});
   const [playlistInEditor, setPlaylistInEditor] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [isCreatingNew, setIsCreatingNew] = useState(false);
 
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -232,7 +234,6 @@ function App() {
   };
 
   const handlePlaylistClick = async (playlistToEdit) => {
-    alert("The playlist id is " + playlistToEdit)
     //TODO
     //Need to potentially transfer the playlist ID to the playlist editor
     //need to popolate the editor with the songs from that playlist
@@ -244,13 +245,11 @@ function App() {
       }
     })
     let data = await response.json();
-    console.log(data);
 
     //This doesnt work, bc the items returned are DIFFERENT!
     //setTracksInEditor(data.items);
     //Need to get the IDS out of the data, then perform another request using the ids to get several tracks
     let ids = data.items.map(item => item.track.id);
-    console.log(ids);
     let idString = "";
     ids.map(id => idString += id + ",")
     response = await fetch(`https://api.spotify.com/v1/tracks?ids=${ids}`, {
@@ -261,9 +260,18 @@ function App() {
       }
     })
     data = await response.json();
-    console.log(data);
     setTracksInEditor(data.tracks);
+    setIsEditing(true);
+    setIsCreatingNew(false);
   }
+
+  const handleStartCreating = () => {
+    //Should clear all the tracks out of the editor
+    //Set it to an empty array
+    clearTracks();
+    //Should pull up the thing to let us enter in the name
+    setIsCreatingNew(true);
+  };
 
   return (
     <div>
@@ -285,6 +293,9 @@ function App() {
           handleClearTracks={clearTracks}
           handleFinishCreating={handleFinishCreating}
           playlistInEditor={playlistInEditor}
+          isEditing={isEditing}
+          isCreatingNew={isCreatingNew}
+          handleStartCreating={handleStartCreating}
         />
       </div>
     </div>

@@ -4,11 +4,9 @@ import PlaylistEditorBody from "./PlaylistEditorBody";
 //Would like it to explain to the user what they are currently doing
 //Editing playlist: "Playlist Name", Creating Playlist: "Playlist Name"
 const PlaylistEditor = (props) => {
-  const [selectedPlaylist, setSelectedPlaylist] = useState({name: null}); //not sure what data type...
+  const [selectedPlaylist, setSelectedPlaylist] = useState({ name: null }); //not sure what data type...
   const [newPlaylistName, setNewPlaylistName] = useState("");
-  const [isCreatingNew, setIsCreatingNew] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
+  const [playlistEditingName, setPlaylistEditingName] = useState("");
   //Game plan
   //Clicking "create new" causes the name field to appear
   //User can enter the name and then finalize the name
@@ -18,64 +16,67 @@ const PlaylistEditor = (props) => {
   //someone selects one, that part will be moved.
   //Someone should also be able to select create new, even if they have selected one and
   //are viewing its contents
-  
+
   //process of creating new
   //click create new
   //text box shows up, user types in name
 
-
   const handleNewPlaylistName = (e) => {
     setNewPlaylistName(e.target.value);
-  }
+  };
 
-  const handleSave = () => {
-
-  }
-
-
-  const handleStartCreating = () => {
-
-    //Should clear all the tracks out of the editor
-    //Set it to an empty array
-    props.handleClearTracks();
-    //Should pull up the thing to let us enter in the name
-    setIsCreatingNew(true);
-  }
-
+  const handleSave = () => {};
 
   
+
   const handleFinishCreating = () => {
     if (props.tracksInEditor.length == 0) {
-      alert("Please add some tracks before creating a new playlist.")
+      alert("Please add some tracks before creating a new playlist.");
     } else if (newPlaylistName == "") {
-      alert("Please enter a name for the new playlist.")
+      alert("Please enter a name for the new playlist.");
     } else {
       props.handleFinishCreating(newPlaylistName);
     }
-  }
+  };
 
   useEffect(() => {
-    if (props.tracksInEditor.length > 0 && isEditing == false) {
+    if (props.tracksInEditor.length > 0 && props.isEditing == false) {
       setIsCreatingNew(true);
     }
-  })
-  
+  });
 
   return (
     <div className={styles.playlistEditorContainer}>
       <div id="editor-header" className={styles.playlistEditorHeader}>
-        {isEditing && <h2>Editing: somehow extract name</h2>}
-        {isCreatingNew == false && isEditing == false && <h2>Editor</h2>}
-        {isCreatingNew && <h2>Creating: {newPlaylistName}</h2>}
-        {isCreatingNew && <div><label>Enter Playlist Name:</label><input type="text" value={newPlaylistName} onChange={handleNewPlaylistName}/></div>}
+        {props.isEditing && !props.isCreatingNew && <h2>Editing: somehow extract name</h2>}
+        {props.isCreatingNew == false && props.isEditing == false && <h2>Editor</h2>}
+        {props.isCreatingNew  && <h2>Creating: {newPlaylistName}</h2>}
+        {props.isCreatingNew && (
+          <div>
+            <label>Enter Playlist Name:</label>
+            <input
+              type="text"
+              value={newPlaylistName}
+              onChange={handleNewPlaylistName}
+            />
+          </div>
+        )}
       </div>
       <div id="editor-body" className={styles.playlistEditorBody}>
-        <PlaylistEditorBody selectedPlaylist={selectedPlaylist} tracksInEditor={props.tracksInEditor} handleRemoveTrack={props.handleRemoveTrack}/>
+        <PlaylistEditorBody
+          selectedPlaylist={selectedPlaylist}
+          tracksInEditor={props.tracksInEditor}
+          handleRemoveTrack={props.handleRemoveTrack}
+        />
       </div>
       <div id="editor-footer" className={styles.playlistEditorFooter}>
-        {isEditing && <button onClick={handleSave}>Save Changes</button>}
-        {!isCreatingNew && <button onClick={handleStartCreating}>Create New</button>}
-        {isCreatingNew && <button onClick={handleFinishCreating}>Save New Playlist</button>}
+        {props.isEditing && <button onClick={handleSave}>Save Changes</button>}
+        {!props.isCreatingNew && (
+          <button onClick={props.handleStartCreating}>Create New</button>
+        )}
+        {props.isCreatingNew && (
+          <button onClick={handleFinishCreating}>Save New Playlist</button>
+        )}
       </div>
     </div>
   );
