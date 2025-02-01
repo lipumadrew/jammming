@@ -47,6 +47,7 @@ const currentToken = {
 
     const now = new Date();
     const expiry = new Date(now.getTime() + expires_in * 1000);
+
     localStorage.setItem("expires", expiry);
   },
 };
@@ -171,11 +172,27 @@ function App() {
 
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
+
+  //Checks if token is expired. Will log us out if it is, sort of....
   const checkIfLoggedIn = async () => {
     if (localStorage.getItem("access_token")) {
-      const data = await getUserData();
-      setUserData(data);
-      setIsLoggedIn(true);
+      let rightNow = new Date();
+      //console.log("below is the current date");
+      //console.log(rightNow);
+      //console.log(typeof rightNow)
+      let expiryDate = new Date(localStorage.getItem("expires"));
+      //console.log("Below is the expiry")
+      //console.log(expiryDate)
+      //console.log(typeof expiryDate)
+      if (expiryDate <= rightNow) {
+        console.log("token expired")
+        setIsLoggedIn(false);
+      } else {
+        console.log("Token is not expired")
+        const data = await getUserData();
+        setUserData(data);
+        setIsLoggedIn(true);
+      }
     } else {
       setIsLoggedIn(false);
     }
