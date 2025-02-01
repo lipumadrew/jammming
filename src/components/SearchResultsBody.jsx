@@ -15,7 +15,7 @@ const SearchResultsBody = (props) => {
               trackObj={item}
               trackTitle={item.name}
               artists={item.artists}
-              trackImg={item.album.images[1].url}
+              trackImg={item.album.images}
               handleAddTrack={props.handleAddTrack}
               isInEditor={false}
             />
@@ -62,7 +62,7 @@ const SearchResultsBody = (props) => {
         {props.searchResults.map((item, idx) => {
           return (
             <Album
-              albumImg={item.images[2].url}
+              albumImg={item.images[1].url}
               key={idx}
               id={item.id}
               albumName={item.name}

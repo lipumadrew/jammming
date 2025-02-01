@@ -25,3 +25,4 @@ Optional things
 -Add pagination, or at least increase the limits of the results
 -Add some kind of loading thing
 -Add a placeholder image for playlists that have none
+-Change ellipse to potentially just change the text size

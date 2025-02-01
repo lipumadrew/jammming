@@ -31,7 +31,7 @@ const Album = (props) => {
     <div
       id="album-container"
       className={styles.albumContainer}
-      onClick={() => props.handleAlbumClick(props.albumName)}
+      onClick={() => props.handleAlbumClick(props.id)}
     >
       <div id="album-img-container" className={styles.albumImgContainer}>
         <img src={props.albumImg} alt="" className={styles.albumImg} />

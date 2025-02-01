@@ -2,6 +2,11 @@ import styles from "../css/Track.module.css";
 import { useState } from "react";
 const Track = (props) => {
   const [artists, setArtists] = useState(props.artists);
+
+  let imgSrc = "";
+  if (props.trackImg != null) {
+    imgSrc = props.trackImg[2].url;
+  }
   
 
   let artistHeaderStr = "";
@@ -31,7 +36,7 @@ const Track = (props) => {
   return (
     <div id="track-container" className={styles.trackContainer}>
       <div id="track-img-container" className={styles.trackImgContainer}>
-        <img src={props.trackImg} alt="" className={styles.trackImg} />
+        <img src={imgSrc} alt="" className={styles.trackImg} />
       </div>
       <div
         id="track-details-container"

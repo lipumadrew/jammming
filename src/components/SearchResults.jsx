@@ -62,7 +62,7 @@ const SearchResults = (props) => {
 
       const data = await response.json();
       setSearchResults(data.tracks.items);
-    } else if (searchType=="albums") {
+    } else if (searchType == "albums") {
       //Perform album search
       const response = await fetch(
         `https://api.spotify.com/v1/search?q=${queryString}&type=album&limit=10`,
@@ -76,20 +76,60 @@ const SearchResults = (props) => {
       );
 
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setSearchResults(data.albums.items);
     } else {
       alert("Something went wrong: Unrecognized search type.");
     }
   };
 
+    //I don't need to bubble this up to the app component
+
   const handleArtistClick = (artistName) => {
+    //TODO: do an api request for several tracks when clicked, NOT a search
     alert("You clicked " + artistName);
   };
 
-  const handleAlbumClick = (albumName) => {
-    alert("You clicked ");
-  }
+
+  //I don't need to bubble this up to the app component
+  const handleAlbumClick = async (albumId) => {
+    //TODO: do an api request for several tracks when clicked, NOT a search
+    alert("You clicked " + albumId);
+    const response = await fetch(
+      `https://api.spotify.com/v1/albums/${albumId}/tracks`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      }
+    );
+    const data = await response.json();
+    console.log("The following is tracks from an album that was clicked")
+    console.log(data)
+    //Need to get the id's from these, then do several track request
+    let ids = data.items.map(track =>track.id )
+    console.log("These are the track ids")
+    console.log(ids);
+    let idString = "";
+    ids.map(id => idString += id + ",")
+    const trackResponse = await fetch(
+      `https://api.spotify.com/v1/tracks?ids=${idString}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      }
+    );
+    const trackData = await trackResponse.json();
+    console.log("This is the response from using the track ids to get the tracks");
+    console.log(trackData);
+    handleSetSearchType("tracks");
+    setSearchResults(trackData.tracks);
+  };
 
   return (
     <div className={styles.searchResultsContainer}>
@@ -111,9 +151,9 @@ const SearchResults = (props) => {
           changeSearchType={handleSetSearchType}
         />
         <SearchOptionBtn
-        searchType="albums"
-        optionText="Albums"
-        changeSearchType={handleSetSearchType}
+          searchType="albums"
+          optionText="Albums"
+          changeSearchType={handleSetSearchType}
         />
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
