@@ -33,7 +33,7 @@ const PlaylistEditor = (props) => {
   }
 
 
-  const handleCreateNew = () => {
+  const handleStartCreating = () => {
 
     //Should clear all the tracks out of the editor
     //Set it to an empty array
@@ -41,20 +41,24 @@ const PlaylistEditor = (props) => {
     //Should pull up the thing to let us enter in the name
     setIsCreatingNew(true);
   }
-  
-  //actual handling of the request
-  //When the playlist is created, immediately start editing it
-  const createNewPlaylist = () => {
 
+
+  
+  const handleFinishCreating = () => {
+    if (props.tracksInEditor.length == 0) {
+      alert("Please add some tracks before creating a new playlist.")
+    } else if (newPlaylistName == "") {
+      alert("Please enter a name for the new playlist.")
+    } else {
+      //Handle the api request
+      //I think this is actually two separate requests
+    }
   }
 
   useEffect(() => {
-    if (props.tracksInEditor.length > 0 && selectedPlaylist.name == null) {
+    if (props.tracksInEditor.length > 0 && isEditing == false) {
       setIsCreatingNew(true);
-    } else if (props.tracksInEditor.length == 0 && selectedPlaylist.name == null) {
-      setIsCreatingNew(false);
     }
-    console.log(isCreatingNew);
   })
   
 
@@ -70,8 +74,9 @@ const PlaylistEditor = (props) => {
         <PlaylistEditorBody selectedPlaylist={selectedPlaylist} tracksInEditor={props.tracksInEditor} handleRemoveTrack={props.handleRemoveTrack}/>
       </div>
       <div id="editor-footer" className={styles.playlistEditorFooter}>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleCreateNew}>Create New</button>
+        {isEditing && <button onClick={handleSave}>Save Changes</button>}
+        {!isCreatingNew && <button onClick={handleStartCreating}>Create New</button>}
+        {isCreatingNew && <button onClick={handleFinishCreating}>Save New Playlist</button>}
       </div>
     </div>
   );
