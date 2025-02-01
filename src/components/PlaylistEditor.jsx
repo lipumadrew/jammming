@@ -1,6 +1,7 @@
 import styles from "../css/PlaylistEditor.module.css";
 import { useEffect, useState } from "react";
 import PlaylistEditorBody from "./PlaylistEditorBody";
+import { use } from "react";
 //Would like it to explain to the user what they are currently doing
 //Editing playlist: "Playlist Name", Creating Playlist: "Playlist Name"
 const PlaylistEditor = (props) => {
@@ -20,6 +21,8 @@ const PlaylistEditor = (props) => {
   //process of creating new
   //click create new
   //text box shows up, user types in name
+
+  
 
   const handleNewPlaylistName = (e) => {
     setNewPlaylistName(e.target.value);

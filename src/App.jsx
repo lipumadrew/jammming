@@ -209,7 +209,11 @@ function App() {
   }
 
   const addTrack = (trackToAdd) => {
+    if (tracksInEditor.length == 0) {
+      setIsCreatingNew(true);
+    }
     setTracksInEditor((prev) => [...prev, trackToAdd]);
+    
   };
 
   //May have to remove by index, filter
