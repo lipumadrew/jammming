@@ -10,8 +10,8 @@ TODOs
     -When a song is added, and we are not currently editing an existing one, the create new stuff should show up
     -The variables will have to change when the track array is not empty
 -Add styling so that it's more obvious what's happening....
--Add logout button
--Add actual functionality for the isLogged in thing, 
+-Add logout button (DONE)
+-Add actual functionality for the isLogged in thing (DONE)
 
 
 Optional things

@@ -59,6 +59,7 @@ const SearchResults = (props) => {
         }
       );
 
+
       const data = await response.json();
       //alert(data.tracks.items); //Array of objects
       setSearchResults(data.tracks.items);
@@ -67,6 +68,10 @@ const SearchResults = (props) => {
       alert("Something went wrong: Unrecognized search type.");
     }
   };
+
+  const handleArtistClick = (artistName) => {
+    alert("You clicked " + artistName);
+  }
 
   return (
     <div className={styles.searchResultsContainer}>
@@ -90,7 +95,7 @@ const SearchResults = (props) => {
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
-        <SearchResultsBody searchResults={searchResults} searchType={searchType} handleAddTrack={props.handleAddTrack}/>
+        <SearchResultsBody searchResults={searchResults} searchType={searchType} handleAddTrack={props.handleAddTrack} handleArtistClick={handleArtistClick}/>
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>
         Footer
