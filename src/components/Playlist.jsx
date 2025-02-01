@@ -4,7 +4,7 @@ const Playlist = (props) => {
     return (
         <div id="playlist-container" className={styles.playlistContainer}>
           <div id="playlist-img-container" className={styles.playlistImgContainer}>
-            <img src={props.playlistImg} alt="" className={styles.playlistImg} />
+            <img src={props.playlistImg} alt="No image" className={styles.playlistImg} />
           </div>
           <div
             id="playlist-details-container"
