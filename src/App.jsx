@@ -21,7 +21,8 @@ const redirectUrl = "http://localhost:5173/"; // your redirect URL - must be loc
 
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
-const scope = "user-read-private user-read-email";
+const scope =
+  "user-read-private user-read-email playlist-modify-public playlist-modify-private";
 
 // Data structure that manages the current active token, caching it in localStorage
 const currentToken = {
@@ -66,8 +67,6 @@ if (code) {
   const updatedUrl = url.search ? url.href : url.href.replace("?", "");
   window.history.replaceState({}, document.title, updatedUrl);
 }
-
-
 
 async function redirectToSpotifyAuthorize() {
   const possible =
@@ -127,16 +126,13 @@ async function getToken(code) {
 }
 
 async function refreshToken() {
-  const response = await fetch(tokenEndpoint, {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
     },
-    body: new URLSearchParams({
-      client_id: clientId,
-      grant_type: "refresh_token",
-      refresh_token: currentToken.refresh_token,
-    }),
+    body: JSON.stringify(data),
   });
 
   return await response.json();
@@ -156,12 +152,6 @@ async function loginWithSpotifyClick() {
   await redirectToSpotifyAuthorize();
 }
 
-
-
-
-
-
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [redirectUrl, setRedirectUrl] = useState("http://localhost:5173/");
@@ -169,8 +159,6 @@ function App() {
   const [authCode, setAuthCode] = useState();
   const [tracksInEditor, setTracksInEditor] = useState([]);
   const [userData, setUserData] = useState({});
-
-
 
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -188,11 +176,11 @@ function App() {
     } else {
       setIsLoggedIn(false);
     }
-  }
+  };
 
   useEffect(() => {
-    checkIfLoggedIn()
-  }, [])
+    checkIfLoggedIn();
+  }, []);
 
   async function logoutClick() {
     localStorage.clear();
@@ -200,32 +188,58 @@ function App() {
     window.location.href = redirectUrl;
   }
 
-
   const addTrack = (trackToAdd) => {
     setTracksInEditor((prev) => [...prev, trackToAdd]);
-  }
-  
+  };
+
   //May have to remove by index, filter
   const removeTrack = (removalIndex) => {
-    setTracksInEditor((prev) => prev.filter((ele, idx) => idx !== removalIndex))
-  }
+    setTracksInEditor((prev) =>
+      prev.filter((ele, idx) => idx !== removalIndex)
+    );
+  };
 
   const clearTracks = () => {
     setTracksInEditor([]);
-  }
+  };
 
+  const handleFinishCreating = async (playListName) => {
+    alert("Looks good, request will be sent");
+    const trackUris = tracksInEditor.map((track) => track.uri); //I think this is good
+    console.log(trackUris);
+    const response = await fetch(`https://api.spotify.com/v1/users/${userData.id}/playlists`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify({
+        name: playListName,
+        description: "This playlist was made with Andrew's awesome playlist editor."
+      })
+    });
+  };
 
   return (
     <div>
       <div className="upper-container">
         <h1>Jammming: Playlist Editor</h1>
-        {isLoggedIn ? `Welcome ${userData.display_name}` : <button onClick={loginWithSpotifyClick}>Log in?</button>}
+        {isLoggedIn ? (
+          `Welcome ${userData.display_name}`
+        ) : (
+          <button onClick={loginWithSpotifyClick}>Log in?</button>
+        )}
         {isLoggedIn && <button onClick={logoutClick}>Log out</button>}
         <h2></h2>
       </div>
       <div className="middle-container">
-        <SearchResults handleAddTrack={addTrack}/>
-        <PlaylistEditor tracksInEditor={tracksInEditor} handleRemoveTrack={removeTrack} handleClearTracks={clearTracks}/>
+        <SearchResults handleAddTrack={addTrack} />
+        <PlaylistEditor
+          tracksInEditor={tracksInEditor}
+          handleRemoveTrack={removeTrack}
+          handleClearTracks={clearTracks}
+          handleFinishCreating={handleFinishCreating}
+        />
       </div>
     </div>
   );

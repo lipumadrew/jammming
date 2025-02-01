@@ -50,8 +50,7 @@ const PlaylistEditor = (props) => {
     } else if (newPlaylistName == "") {
       alert("Please enter a name for the new playlist.")
     } else {
-      //Handle the api request
-      //I think this is actually two separate requests
+      props.handleFinishCreating(newPlaylistName);
     }
   }
 
