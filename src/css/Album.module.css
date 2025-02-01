@@ -1,0 +1,43 @@
+.albumContainer {
+    height: 80px;
+    border-bottom: solid black 1px;
+    display: flex;
+    justify-content: space-between;
+   }
+   
+   .albumImgContainer {
+     height: 80px;
+     width: 80px;
+     background-color: brown;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   
+   .albumImg {
+       height: 60px;
+       width: 60px;
+   }
+   
+   .albumDetailsContainer {
+     background-color: green;
+     height: 100%;
+     flex-grow: 1;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     overflow: hidden;
+     padding-left: 10px;
+   }
+   
+   .albumTitle {
+     font-size: 30px;
+   }
+   
+   .albumGenres {
+    font-size: 20px;
+   }
+   
+   
+   
+   

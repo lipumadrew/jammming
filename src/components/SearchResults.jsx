@@ -16,7 +16,9 @@ const SearchResults = (props) => {
   };
 
   const executeSearch = async (queryString) => {
-    if (searchType == "") {
+    if (!props.isLoggedIn) {
+      alert("Please log in. :)");
+    } else if (searchType == "") {
       alert(
         "Plese select whether you want to search for tracks, artists, or your playlists."
       );
@@ -60,7 +62,22 @@ const SearchResults = (props) => {
 
       const data = await response.json();
       setSearchResults(data.tracks.items);
-      
+    } else if (searchType=="albums") {
+      //Perform album search
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${queryString}&type=album&limit=10`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data)
+      setSearchResults(data.albums.items);
     } else {
       alert("Something went wrong: Unrecognized search type.");
     }
@@ -69,6 +86,10 @@ const SearchResults = (props) => {
   const handleArtistClick = (artistName) => {
     alert("You clicked " + artistName);
   };
+
+  const handleAlbumClick = (albumName) => {
+    alert("You clicked ");
+  }
 
   return (
     <div className={styles.searchResultsContainer}>
@@ -89,6 +110,11 @@ const SearchResults = (props) => {
           optionText="Tracks"
           changeSearchType={handleSetSearchType}
         />
+        <SearchOptionBtn
+        searchType="albums"
+        optionText="Albums"
+        changeSearchType={handleSetSearchType}
+        />
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
       <div id="results-body" className={styles.searchResultsBody}>
@@ -98,6 +124,7 @@ const SearchResults = (props) => {
           handleAddTrack={props.handleAddTrack}
           handleArtistClick={handleArtistClick}
           handlePlaylistClick={props.handlePlaylistClick}
+          handleAlbumClick={handleAlbumClick}
         />
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>

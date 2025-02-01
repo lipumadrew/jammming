@@ -2,7 +2,7 @@ TODOs
 ------------------
 -Add funcitonality to the remove button (DONE)
 -Add functionality to clicking an artist
-    -it should execute a search for songs by that artist
+    -it should execute a search for albums by that artist
 -Add functionality to clicking on one of the user's playlists
     -It should populate the editor with that playlist
 -Add functionality so that if the user tries to search, but they aren't logged in, they get some kind of a message, or something

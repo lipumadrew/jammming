@@ -1,6 +1,7 @@
 import Track from "./Track";
 import Artist from "./Artist";
 import Playlist from "./Playlist";
+import Album from "./Album";
 
 const SearchResultsBody = (props) => {
   if (props.searchType == "tracks") {
@@ -50,6 +51,24 @@ const SearchResultsBody = (props) => {
               id={item.id}
               playlistName={item.name}
               handlePlaylistClick={props.handlePlaylistClick}
+            />
+          );
+        })}
+      </div>
+    );
+  } else if (props.searchType == "albums") {
+    return (
+      <div>
+        {props.searchResults.map((item, idx) => {
+          return (
+            <Album
+              albumImg={item.images[2].url}
+              key={idx}
+              id={item.id}
+              albumName={item.name}
+              handleAlbumClick={props.handleAlbumClick}
+              artists={item.artists}
+              albumTitle={item.name}
             />
           );
         })}

@@ -209,61 +209,71 @@ function App() {
   const handleFinishCreating = async (playListName) => {
     alert("Looks good, request will be sent");
     const trackUris = tracksInEditor.map((track) => track.uri); //I think this is good
-    const response = await fetch(`https://api.spotify.com/v1/users/${userData.id}/playlists`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify({
-        name: playListName,
-        description: "This playlist was made with Andrew's awesome playlist editor."
-      })
-    });
+    const response = await fetch(
+      `https://api.spotify.com/v1/users/${userData.id}/playlists`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify({
+          name: playListName,
+          description:
+            "This playlist was made with Andrew's awesome playlist editor.",
+        }),
+      }
+    );
     let data = await response.json();
-    const addResponse = await fetch(`https://api.spotify.com/v1/playlists/${data.id}/tracks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify({
-        uris: trackUris
-      })
-    });
+    const addResponse = await fetch(
+      `https://api.spotify.com/v1/playlists/${data.id}/tracks`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify({
+          uris: trackUris,
+        }),
+      }
+    );
   };
 
   const handlePlaylistClick = async (playlistToEdit) => {
     //TODO
     //Need to potentially transfer the playlist ID to the playlist editor
     //need to popolate the editor with the songs from that playlist
-    let response = await fetch(`https://api.spotify.com/v1/playlists/${playlistToEdit}/tracks`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
+    let response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistToEdit}/tracks`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
       }
-    })
+    );
     let data = await response.json();
 
     //This doesnt work, bc the items returned are DIFFERENT!
     //setTracksInEditor(data.items);
     //Need to get the IDS out of the data, then perform another request using the ids to get several tracks
-    let ids = data.items.map(item => item.track.id);
+    let ids = data.items.map((item) => item.track.id);
     let idString = "";
-    ids.map(id => idString += id + ",")
+    ids.map((id) => (idString += id + ","));
     response = await fetch(`https://api.spotify.com/v1/tracks?ids=${ids}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: "Bearer " + localStorage.getItem("access_token"),
-      }
-    })
+      },
+    });
     data = await response.json();
     setTracksInEditor(data.tracks);
     setIsEditing(true);
     setIsCreatingNew(false);
-  }
+  };
 
   const handleStartCreating = () => {
     //Should clear all the tracks out of the editor
@@ -286,7 +296,11 @@ function App() {
         <h2></h2>
       </div>
       <div className="middle-container">
-        <SearchResults handleAddTrack={addTrack}  handlePlaylistClick={handlePlaylistClick}/>
+        <SearchResults
+          handleAddTrack={addTrack}
+          handlePlaylistClick={handlePlaylistClick}
+          isLoggedIn={isLoggedIn}
+        />
         <PlaylistEditor
           tracksInEditor={tracksInEditor}
           handleRemoveTrack={removeTrack}
