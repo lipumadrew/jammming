@@ -34,8 +34,10 @@ const PlaylistEditor = (props) => {
 
 
   const handleCreateNew = () => {
+
     //Should clear all the tracks out of the editor
-    setTracks([]); //Set it to an empty array
+    //Set it to an empty array
+    props.handleClearTracks();
     //Should pull up the thing to let us enter in the name
     setIsCreatingNew(true);
   }
@@ -52,6 +54,7 @@ const PlaylistEditor = (props) => {
     } else if (props.tracksInEditor.length == 0 && selectedPlaylist.name == null) {
       setIsCreatingNew(false);
     }
+    console.log(isCreatingNew);
   })
   
 

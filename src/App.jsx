@@ -210,6 +210,10 @@ function App() {
     setTracksInEditor((prev) => prev.filter((ele, idx) => idx !== removalIndex))
   }
 
+  const clearTracks = () => {
+    setTracksInEditor([]);
+  }
+
 
   return (
     <div>
@@ -221,7 +225,7 @@ function App() {
       </div>
       <div className="middle-container">
         <SearchResults handleAddTrack={addTrack}/>
-        <PlaylistEditor tracksInEditor={tracksInEditor} handleRemoveTrack={removeTrack}/>
+        <PlaylistEditor tracksInEditor={tracksInEditor} handleRemoveTrack={removeTrack} handleClearTracks={clearTracks}/>
       </div>
     </div>
   );

@@ -12,6 +12,8 @@ TODOs
 -Add styling so that it's more obvious what's happening....
 -Add logout button (DONE)
 -Add actual functionality for the isLogged in thing (DONE)
+-Add Album search, maybe when click on an artist, search for albums
+-Add functionality so that when albums are clicked, songs on that album are displayed
 
 
 Optional things
