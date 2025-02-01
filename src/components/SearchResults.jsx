@@ -32,6 +32,7 @@ const SearchResults = (props) => {
         }
       );
       const data = await response.json();
+      console.log(data);
       setSearchResults(data.items);
     } else if (searchType == "artists") {
       const response = await fetch(

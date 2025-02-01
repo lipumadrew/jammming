@@ -35,7 +35,7 @@ const SearchResultsBody = (props) => {
     return (
         <div>
             {props.searchResults.map((item) =>  {
-                return <Playlist playlistImg={item.images.url} key={item.id} playlistName={item.name}/>
+                return <Playlist playlistImg={item.images} key={item.id} playlistName={item.name}/>
             })}
         </div>
     )
