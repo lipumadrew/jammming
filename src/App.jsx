@@ -156,10 +156,7 @@ async function loginWithSpotifyClick() {
   await redirectToSpotifyAuthorize();
 }
 
-async function logoutClick() {
-  localStorage.clear();
-  window.location.href = redirectUrl;
-}
+
 
 
 
@@ -196,6 +193,12 @@ function App() {
   useEffect(() => {
     checkIfLoggedIn()
   }, [])
+
+  async function logoutClick() {
+    localStorage.clear();
+    setUserData({});
+    window.location.href = redirectUrl;
+  }
 
 
   const addTrack = (trackToAdd) => {
