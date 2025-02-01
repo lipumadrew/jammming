@@ -213,6 +213,7 @@ function App() {
       <div className="upper-container">
         <h1>Jammming: Playlist Editor</h1>
         {isLoggedIn ? `Welcome ${userData.display_name}` : <button onClick={loginWithSpotifyClick}>Log in?</button>}
+        {isLoggedIn && <button onClick={logoutClick}>Log out</button>}
         <h2></h2>
       </div>
       <div className="middle-container">
