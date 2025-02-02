@@ -172,7 +172,6 @@ function App() {
 
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
-
   //Checks if token is expired. Will log us out if it is, sort of....
   const checkIfLoggedIn = async () => {
     if (localStorage.getItem("access_token")) {
@@ -185,10 +184,10 @@ function App() {
       //console.log(expiryDate)
       //console.log(typeof expiryDate)
       if (expiryDate <= rightNow) {
-        console.log("token expired")
+        console.log("token expired");
         setIsLoggedIn(false);
       } else {
-        console.log("Token is not expired")
+        console.log("Token is not expired");
         const data = await getUserData();
         setUserData(data);
         setIsLoggedIn(true);
@@ -213,7 +212,6 @@ function App() {
       setIsCreatingNew(true);
     }
     setTracksInEditor((prev) => [...prev, trackToAdd]);
-    
   };
 
   //May have to remove by index, filter
@@ -262,7 +260,7 @@ function App() {
   };
 
   const handlePlaylistClick = async (playlistId, playlistName) => {
-    setPlaylistInEditor({playlistName: playlistName, playlistId: playlistId});
+    setPlaylistInEditor({ playlistName: playlistName, playlistId: playlistId });
     let response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
@@ -275,64 +273,70 @@ function App() {
     );
     let data = await response.json();
 
-    //This doesnt work, bc the items returned are DIFFERENT!
-    //setTracksInEditor(data.items);
-    //Need to get the IDS out of the data, then perform another request using the ids to get several tracks
-    let ids = data.items.map((item) => item.track.id);
-    let idString = "";
-    ids.map((id) => (idString += id + ","));
-    response = await fetch(`https://api.spotify.com/v1/tracks?ids=${ids}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-    });
-    data = await response.json();
-    setTracksInEditor(data.tracks);
+    if (data.items.length > 0) {
+      let ids = data.items.map((item) => item.track.id);
+      let idString = "";
+      ids.map((id) => (idString += id + ","));
+      response = await fetch(`https://api.spotify.com/v1/tracks?ids=${ids}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      });
+      data = await response.json();
+      setTracksInEditor(data.tracks);
+    } else {
+      setTracksInEditor([]);
+    }
+
     setIsEditing(true);
     setIsCreatingNew(false);
   };
 
   const handleStartCreating = () => {
-    
     clearTracks();
     setIsCreatingNew(true);
   };
 
   const handleSave = async (playlistName, playlistId) => {
-    alert("You clicked the save button!")
+    alert("You clicked the save button!");
     alert("name: " + playlistName + "   ID: " + playlistId);
     //Get uris from tracks in editor
-    let uris = {"tracks": []};
+    let uris = { tracks: [] };
     console.log(tracksInEditor);
     //Make into little objects
-    tracksInEditor.map((track) => uris.tracks.push({"uri": track.uri}))
-    console.log(uris)
+    tracksInEditor.map((track) => uris.tracks.push({ uri: track.uri }));
+    console.log(uris);
     //make delete request, IT WORKS!
-    let response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify(uris)
-    });
+    let response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(uris),
+      }
+    );
     //I think it workssss
     let uriArr = [];
-    tracksInEditor.map(track => uriArr.push(track.uri))
-    response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify(uriArr)
-    });
-
+    tracksInEditor.map((track) => uriArr.push(track.uri));
+    response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(uriArr),
+      }
+    );
 
     //Make post request
-  }
+  };
 
   return (
     <div>
