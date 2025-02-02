@@ -163,6 +163,7 @@ function App() {
   const [playlistInEditor, setPlaylistInEditor] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
+  const [originalTracks, setOriginalTracks] = useState([]);
 
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -286,6 +287,7 @@ function App() {
       });
       data = await response.json();
       setTracksInEditor(data.tracks);
+      setOriginalTracks(data.tracks);
     } else {
       setTracksInEditor([]);
     }
@@ -302,9 +304,12 @@ function App() {
   const handleSave = async (playlistName, playlistId) => {
     let uris = { tracks: [] };
     console.log(tracksInEditor);
+    console.log(originalTracks);
+    
     //Make into little objects
     tracksInEditor.map((track) => uris.tracks.push({ uri: track.uri }));
     console.log(uris);
+    originalTracks.map((track) => uris.tracks.push({ uri: track.uri }))
     //make delete request, IT WORKS!
     let response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
