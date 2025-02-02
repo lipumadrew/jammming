@@ -261,10 +261,8 @@ function App() {
     );
   };
 
-  const handlePlaylistClick = async (playlistToEdit) => {
-    //TODO
-    //Need to potentially transfer the playlist ID to the playlist editor
-    //need to popolate the editor with the songs from that playlist
+  const handlePlaylistClick = async (playlistToEdit, playlistName) => {
+    setPlaylistInEditor(playlistName);
     let response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistToEdit}/tracks`,
       {
@@ -297,12 +295,14 @@ function App() {
   };
 
   const handleStartCreating = () => {
-    //Should clear all the tracks out of the editor
-    //Set it to an empty array
+    
     clearTracks();
-    //Should pull up the thing to let us enter in the name
     setIsCreatingNew(true);
   };
+
+  const handleSave = () => {
+    alert("You clicked the save button!")
+  }
 
   return (
     <div>
@@ -331,6 +331,7 @@ function App() {
           isEditing={isEditing}
           isCreatingNew={isCreatingNew}
           handleStartCreating={handleStartCreating}
+          handleSave={handleSave}
         />
       </div>
     </div>

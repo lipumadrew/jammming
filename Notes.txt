@@ -3,17 +3,18 @@ TODOs
 -Add funcitonality to the remove button (DONE)
 -Add functionality to clicking an artist
     -it should execute a search for albums by that artist
--Add functionality to clicking on one of the user's playlists
-    -It should populate the editor with that playlist
--Add functionality so that if the user tries to search, but they aren't logged in, they get some kind of a message, or something
+-Add functionality to clicking on one of the user's playlists (DONE)
+    -It should populate the editor with that playlist(DONE)
+-Add functionality so that if the user tries to search, but they aren't logged in, they get some kind of a message, or something (SORT OF DONE)
 -Add functionality to save and create new buttons in the playlist editor
     -When a song is added, and we are not currently editing an existing one, the create new stuff should show up
     -The variables will have to change when the track array is not empty
 -Add styling so that it's more obvious what's happening....
 -Add logout button (DONE)
 -Add actual functionality for the isLogged in thing (DONE)
--Add Album search, maybe when click on an artist, search for albums
+-Add Album search, maybe when click on an artist, search for albums (done)
 -Add functionality so that when albums are clicked, songs on that album are displayed
+-Make editor show the name of currently editing playlist
 
 
 Optional things
@@ -25,4 +26,6 @@ Optional things
 -Add pagination, or at least increase the limits of the results
 -Add some kind of loading thing
 -Add a placeholder image for playlists that have none
--Change ellipse to potentially just change the text size
+-Change ellipse to potentially just change the text size (Bad idea)
+-Implement something regarding empty searches, like not performing
+-I'm not sure the searching of users playlist actually searches them....
