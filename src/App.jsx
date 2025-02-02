@@ -208,7 +208,7 @@ function App() {
   }
 
   const addTrack = (trackToAdd) => {
-    if (tracksInEditor.length == 0) {
+    if (isEditing == false) {
       setIsCreatingNew(true);
     }
     setTracksInEditor((prev) => [...prev, trackToAdd]);
