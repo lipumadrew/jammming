@@ -22,12 +22,9 @@ const PlaylistEditor = (props) => {
   //click create new
   //text box shows up, user types in name
 
-  
-
   const handleNewPlaylistName = (e) => {
     setNewPlaylistName(e.target.value);
   };
-
 
   const handleFinishCreating = () => {
     if (props.tracksInEditor.length == 0) {
@@ -43,7 +40,7 @@ const PlaylistEditor = (props) => {
     <div className={styles.playlistEditorContainer}>
       <div id="editor-header" className={styles.playlistEditorHeader}>
         {props.isEditing && !props.isCreatingNew && (
-          <h2>Editing: {props.playlistInEditor}</h2>
+          <h2>Editing: {props.playlistInEditor.playlistName}</h2>
         )}
         {props.isCreatingNew == false && props.isEditing == false && (
           <h2>Editor</h2>
@@ -69,7 +66,16 @@ const PlaylistEditor = (props) => {
       </div>
       <div id="editor-footer" className={styles.playlistEditorFooter}>
         {props.isEditing && !props.isCreatingNew && (
-          <button onClick={props.handleSave}>Save Changes</button>
+          <button
+            onClick={() =>
+              props.handleSave(
+                props.playlistInEditor.playlistName,
+                props.playlistInEditor.playlistId
+              )
+            }
+          >
+            Save Changes
+          </button>
         )}
         {!props.isCreatingNew && (
           <button onClick={props.handleStartCreating}>Create New</button>

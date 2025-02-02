@@ -261,10 +261,10 @@ function App() {
     );
   };
 
-  const handlePlaylistClick = async (playlistToEdit, playlistName) => {
-    setPlaylistInEditor(playlistName);
+  const handlePlaylistClick = async (playlistId, playlistName) => {
+    setPlaylistInEditor({playlistName: playlistName, playlistId: playlistId});
     let response = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistToEdit}/tracks`,
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
         method: "GET",
         headers: {
@@ -300,8 +300,38 @@ function App() {
     setIsCreatingNew(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async (playlistName, playlistId) => {
     alert("You clicked the save button!")
+    alert("name: " + playlistName + "   ID: " + playlistId);
+    //Get uris from tracks in editor
+    let uris = {"tracks": []};
+    console.log(tracksInEditor);
+    //Make into little objects
+    tracksInEditor.map((track) => uris.tracks.push({"uri": track.uri}))
+    console.log(uris)
+    //make delete request, IT WORKS!
+    let response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify(uris)
+    });
+    //I think it workssss
+    let uriArr = [];
+    tracksInEditor.map(track => uriArr.push(track.uri))
+    response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify(uriArr)
+    });
+
+
+    //Make post request
   }
 
   return (
