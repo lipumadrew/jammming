@@ -1,6 +1,6 @@
 .trackContainer {
  height: 60px;
- border-bottom: solid black 1px;
+ border-bottom: solid grey 1px;
  display: flex;
  justify-content: space-between;
 }

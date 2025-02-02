@@ -177,7 +177,7 @@ const SearchResults = (props) => {
         />
       </div>
       <div id="results-footer" className={styles.searchResultsFooter}>
-        Footer
+        <img src="src/assets/Full_Logo_Black_CMYK.svg" className={styles.spotifyLogo}/>
       </div>
     </div>
   );

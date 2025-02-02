@@ -348,9 +348,9 @@ function App() {
         {isLoggedIn ? (
           `Welcome ${userData.display_name}`
         ) : (
-          <button onClick={loginWithSpotifyClick}>Log in?</button>
+          <button onClick={loginWithSpotifyClick} className="login-button">Log in?</button>
         )}
-        {isLoggedIn && <button onClick={logoutClick}>Log out</button>}
+        {isLoggedIn && <button onClick={logoutClick} className="logout-button">Log out</button>}
         
         </div>
       </div>

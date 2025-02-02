@@ -16,6 +16,8 @@ TODOs
 -Add functionality so that when albums are clicked, songs on that album are displayed (DONE)
 -Make editor show the name of currently editing playlist(DONE)
 
+TODO!!:: Need to add some more error tolerance for results that contain missing fields.
+Particularly, some obscure tracks/artists may not have images.
 
 Optional things
 ---------------------

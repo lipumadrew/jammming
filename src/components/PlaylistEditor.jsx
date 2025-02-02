@@ -53,6 +53,7 @@ const PlaylistEditor = (props) => {
               type="text"
               value={newPlaylistName}
               onChange={handleNewPlaylistName}
+              className={styles.newPlaylistNameField}
             />
           </div>
         )}
@@ -73,15 +74,26 @@ const PlaylistEditor = (props) => {
                 props.playlistInEditor.playlistId
               )
             }
+            className={styles.saveChangesButton}
           >
             Save Changes
           </button>
         )}
         {!props.isCreatingNew && (
-          <button onClick={props.handleStartCreating}>Create New</button>
+          <button
+            onClick={props.handleStartCreating}
+            className={styles.createNewButton}
+          >
+            Create New
+          </button>
         )}
         {props.isCreatingNew && (
-          <button onClick={handleFinishCreating}>Save New Playlist</button>
+          <button
+            onClick={handleFinishCreating}
+            className={styles.saveNewButton}
+          >
+            Save New Playlist
+          </button>
         )}
       </div>
     </div>

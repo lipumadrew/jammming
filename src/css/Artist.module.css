@@ -1,6 +1,6 @@
 .artistContainer {
     height: 80px;
-    border-bottom: solid black 1px;
+    border-bottom: solid grey 2px;
     display: flex;
     justify-content: space-between;
    }

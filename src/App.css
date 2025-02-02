@@ -1,8 +1,8 @@
 .main-container {
   background-image: url("./assets/Flatart-on-freepik.jpg");
   background-color: rgb(31, 24, 88);
-  background-size: 900px;
-  background-repeat: round;
+  background-size: 1500px;
+  background-repeat: none;
   height: 100%;
 }
 
@@ -13,12 +13,16 @@
 }
 
 .upper-container-content {
+  height: 120px;
+  display: flex;
+  text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   background-color: rgba(255,255,255,.8);
   margin: 2%;
-  padding: 1% 2%;
+  padding: 0.5% 1%;
 }
 
 .middle-container {
@@ -26,4 +30,43 @@
   justify-content: space-around;
   padding-bottom: 10%;
 }
+
+.login-button {
+  font-size: 18px;
+  padding: 5px;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: rgba(190, 244, 255, 0.5);
+  outline: solid rgb(190, 252, 255) 5px;
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
+.login-button:active {
+  background: rgb(190, 252, 255);
+}
+
+.logout-button {
+  font-size: 18px;
+  padding: 5px;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: rgba(223, 190, 255, .5);
+  outline: solid rgb(223, 190, 255) 5px;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}
+
+.logout-button:active {
+  background: rgb(223, 190, 255);
+}
+
+
+
 

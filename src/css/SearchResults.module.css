@@ -27,12 +27,18 @@
   width: 100%;
   height: 70%;
   overflow: scroll;
-  border-top: solid black 1px;
-  border-bottom: solid black 1px;
+  border-top: solid grey 1px;
+  border-bottom: solid grey 1px;
 }
 
 .searchResultsFooter {
   width: 100%;
   height: 15%;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spotifyLogo {
+  width: 200px;
 }

@@ -1,0 +1,24 @@
+.searchBar {
+    background: rgba(148, 148, 148, 0.478);
+    border: none;
+    font-size: 16px;
+    width: 200px;
+    padding: 1px;
+}
+
+.submitButton {
+    border: solid rgba(46, 188, 188, 0.55) 3px;
+    margin-left: 5px;
+    padding: 1px;
+    font-size: 16px;
+    
+}
+
+.submitButton:hover {
+    cursor: pointer;
+    background-color: rgba(46, 188, 188, 0.55);
+}
+
+.submitButton:active {
+    background-color: rgba(55, 225, 225, 0.663);
+}
