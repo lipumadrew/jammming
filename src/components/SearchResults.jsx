@@ -83,7 +83,7 @@ const SearchResults = (props) => {
     }
   };
 
-    //I don't need to bubble this up to the app component
+  //I don't need to bubble this up to the app component
 
   const handleArtistClick = async (index) => {
     //TODO: do an api request for several tracks when clicked, NOT a search
@@ -98,12 +98,11 @@ const SearchResults = (props) => {
         },
       }
     );
-    let data = await response.json()
+    let data = await response.json();
     console.log(data);
     handleSetSearchType("albums");
     setSearchResults(data.items);
   };
-
 
   const handleAlbumClick = async (albumId) => {
     const response = await fetch(
@@ -117,9 +116,9 @@ const SearchResults = (props) => {
       }
     );
     const data = await response.json();
-    let ids = data.items.map(track =>track.id )
+    let ids = data.items.map((track) => track.id);
     let idString = "";
-    ids.map(id => idString += id + ",")
+    ids.map((id) => (idString += id + ","));
     const trackResponse = await fetch(
       `https://api.spotify.com/v1/tracks?ids=${idString}`,
       {
@@ -139,26 +138,32 @@ const SearchResults = (props) => {
     <div className={styles.searchResultsContainer}>
       <div id="results-header" className={styles.searchResultsHeader}>
         <h2>Search For:</h2>
-        <SearchOptionBtn
-          searchType="myPlaylists"
-          optionText="My Playlists"
-          changeSearchType={handleSetSearchType}
-        />
-        <SearchOptionBtn
-          searchType="artists"
-          optionText="Artists"
-          changeSearchType={handleSetSearchType}
-        />
-        <SearchOptionBtn
-          searchType="tracks"
-          optionText="Tracks"
-          changeSearchType={handleSetSearchType}
-        />
-        <SearchOptionBtn
-          searchType="albums"
-          optionText="Albums"
-          changeSearchType={handleSetSearchType}
-        />
+        <div className={styles.buttonRowContainer}>
+          <SearchOptionBtn
+            searchType="myPlaylists"
+            optionText="My Playlists"
+            currentSearchType={searchType}
+            changeSearchType={handleSetSearchType}
+          />
+          <SearchOptionBtn
+            searchType="artists"
+            optionText="Artists"
+            currentSearchType={searchType}
+            changeSearchType={handleSetSearchType}
+          />
+          <SearchOptionBtn
+            searchType="tracks"
+            optionText="Tracks"
+            currentSearchType={searchType}
+            changeSearchType={handleSetSearchType}
+          />
+          <SearchOptionBtn
+            searchType="albums"
+            optionText="Albums"
+            currentSearchType={searchType}
+            changeSearchType={handleSetSearchType}
+          />
+        </div>
         <SearchBar searchType={searchType} executeSearch={executeSearch} />
       </div>
       <div id="results-body" className={styles.searchResultsBody}>

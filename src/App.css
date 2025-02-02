@@ -1,3 +1,10 @@
+.main-container {
+  background-image: url("./assets/Flatart-on-freepik.jpg");
+  background-color: rgb(31, 24, 88);
+  background-size: 900px;
+  background-repeat: round;
+  height: 100%;
+}
 
 .upper-container {
   display: flex;
@@ -5,8 +12,18 @@
   align-items: center;
 }
 
+.upper-container-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255,255,255,.8);
+  margin: 2%;
+  padding: 1% 2%;
+}
+
 .middle-container {
   display: flex;
   justify-content: space-around;
-  background-color: grey;
+  padding-bottom: 10%;
 }
+

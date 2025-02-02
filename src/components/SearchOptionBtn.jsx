@@ -1,9 +1,9 @@
 
+import styles from "../css/SearchOptionBtn.module.css"
+import { useState } from "react";
 
-
-//TODO: Add styling for selected/unselected buttons. Can change based on selected search type
 const SearchOptionBtn = (props) => {
-
+    
 
 
     const handleClick = () => {
@@ -12,7 +12,7 @@ const SearchOptionBtn = (props) => {
     
 
     return (
-        <button onClick={handleClick}>
+        <button onClick={handleClick} className={props.searchType == props.currentSearchType ? styles.isSelectedButton : styles.regularButton}>
             {props.optionText}
         </button>
     )

@@ -1,0 +1,12 @@
+.isSelectedButton {
+    background: none;
+    border: 3px solid black;
+    font-size: 18px;
+}
+
+.regularButton {
+    background-color: white;
+    border: none;
+    background: none;
+    font-size: 18px;
+}

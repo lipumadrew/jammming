@@ -1,29 +1,37 @@
 .searchResultsContainer {
-  border: solid black 2px;
-  width: 400px;
-  height: 500px;
+  width: 450px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(255,255,255,.8);
 }
 
 .searchResultsHeader {
-  background-color: blue;
   width: 100%;
   height: 15%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
+}
 
+.buttonRowContainer {
+  display: flex;
+  justify-content: space-around;
+  
 }
 
 .searchResultsBody {
-  background-color: aqua;
   width: 100%;
   height: 70%;
   overflow: scroll;
+  border-top: solid black 1px;
+  border-bottom: solid black 1px;
 }
 
 .searchResultsFooter {
-  background-color: aquamarine;
   width: 100%;
   height: 15%;
   

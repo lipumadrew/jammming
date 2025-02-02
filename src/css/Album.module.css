@@ -8,7 +8,6 @@
    .albumImgContainer {
      height: 80px;
      width: 80px;
-     background-color: brown;
      display: flex;
      justify-content: center;
      align-items: center;
@@ -20,7 +19,6 @@
    }
    
    .albumDetailsContainer {
-     background-color: green;
      height: 100%;
      flex-grow: 1;
      display: flex;
