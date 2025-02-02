@@ -1,8 +1,8 @@
 TODOs
 ------------------
 -Add funcitonality to the remove button (DONE)
--Add functionality to clicking an artist
-    -it should execute a search for albums by that artist
+-Add functionality to clicking an artist (DONE)
+    -it should execute a search for albums by that artist (DONE!)
 -Add functionality to clicking on one of the user's playlists (DONE)
     -It should populate the editor with that playlist(DONE)
 -Add functionality so that if the user tries to search, but they aren't logged in, they get some kind of a message, or something (SORT OF DONE)
@@ -16,19 +16,6 @@ TODOs
 -Add functionality so that when albums are clicked, songs on that album are displayed (DONE)
 -Make editor show the name of currently editing playlist(DONE)
 
-BIG ERROR
-Currently, the logic for removing/deleting a track and saving it doesn't work
-
-My approach to the save button, when editing, is that I delete the tracks by id, then add them again
-This is supposedly so that they are all added in the order that they are present in the editor
-
-I need to understand what happens when i click remove
-Perhaps I think that when a track is removed from the editor, I need to add it to an array of tracks to remove
-if I'm editing a playlist that exists already, it's gonna put those tracks into the editor,
-If i remove a track from the editor, It takes it away from the "tracksInEditor" array, and I don't have access to that uri anymore
-If I keep "track" of a track in an array, then I can combine the uris from tracks to delete, with the tracks in the editor
-when I make the initial delete request. That way, if the song was already there, it'll get removed.
-One potential problem is, if I send a delete request, and the track isn't in the playlist, will it give me an error?
 
 Optional things
 ---------------------
