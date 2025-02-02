@@ -300,9 +300,6 @@ function App() {
   };
 
   const handleSave = async (playlistName, playlistId) => {
-    alert("You clicked the save button!");
-    alert("name: " + playlistName + "   ID: " + playlistId);
-    //Get uris from tracks in editor
     let uris = { tracks: [] };
     console.log(tracksInEditor);
     //Make into little objects
