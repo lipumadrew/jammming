@@ -23,7 +23,7 @@ const Artist = (props) => {
     }
 
   return (
-    <div id="artist-container" className={styles.artistContainer} onClick={() => props.handleArtistClick(props.artistName)}>
+    <div id="artist-container" className={styles.artistContainer} onClick={() => props.handleArtistClick(props.index)}>
       <div id="artist-img-container" className={styles.artistImgContainer}>
         <img src={props.artistImg} alt="" className={styles.artistImg} />
       </div>

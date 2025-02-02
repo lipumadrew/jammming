@@ -27,12 +27,13 @@ const SearchResultsBody = (props) => {
     //Artists returned instead
     return (
       <div>
-        {props.searchResults.map((item) => {
+        {props.searchResults.map((item, index) => {
           return (
             <Artist
               artistImg={item.images[2].url}
               artistName={item.name}
               key={item.id}
+              index={index}
               artistGenres={item.genres}
               handleArtistClick={props.handleArtistClick}
             />

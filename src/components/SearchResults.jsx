@@ -85,16 +85,27 @@ const SearchResults = (props) => {
 
     //I don't need to bubble this up to the app component
 
-  const handleArtistClick = (artistName) => {
+  const handleArtistClick = async (index) => {
     //TODO: do an api request for several tracks when clicked, NOT a search
-    alert("You clicked " + artistName);
+    let artistId = searchResults[index].id;
+    const response = await fetch(
+      `https://api.spotify.com/v1/artists/${artistId}/albums`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      }
+    );
+    let data = await response.json()
+    console.log(data);
+    handleSetSearchType("albums");
+    setSearchResults(data.items);
   };
 
 
-  //I don't need to bubble this up to the app component
   const handleAlbumClick = async (albumId) => {
-    //TODO: do an api request for several tracks when clicked, NOT a search
-    alert("You clicked " + albumId);
     const response = await fetch(
       `https://api.spotify.com/v1/albums/${albumId}/tracks`,
       {
@@ -106,12 +117,7 @@ const SearchResults = (props) => {
       }
     );
     const data = await response.json();
-    console.log("The following is tracks from an album that was clicked")
-    console.log(data)
-    //Need to get the id's from these, then do several track request
     let ids = data.items.map(track =>track.id )
-    console.log("These are the track ids")
-    console.log(ids);
     let idString = "";
     ids.map(id => idString += id + ",")
     const trackResponse = await fetch(
@@ -125,8 +131,6 @@ const SearchResults = (props) => {
       }
     );
     const trackData = await trackResponse.json();
-    console.log("This is the response from using the track ids to get the tracks");
-    console.log(trackData);
     handleSetSearchType("tracks");
     setSearchResults(trackData.tracks);
   };
